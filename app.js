@@ -11,13 +11,16 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const dotenv = require("dotenv");
 
+dotenv.config();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
+const PORT = process.env.PORT || 5000;
 
 const sessionOptions = {
     secret: " mysupersecretcode",
@@ -39,7 +42,7 @@ main()
 .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/airBnB');
+  await mongoose.connect(process.env.MONGO_URI);
 }
 
 
@@ -191,6 +194,6 @@ app.get("/logout", (req, res)=>{
     })
 })
 
-app.listen(8080, ()=>{
-    console.log("app is listening on port 8080");
+app.listen(PORT, ()=>{
+    console.log("app is listening on port " + PORT);
 });
