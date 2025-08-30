@@ -166,7 +166,7 @@ app.post("/signup" , async(req, res)=>{
         if(err){
             return next(err);
         }
-         req.flash("success", "Welcome to AirBnB");
+         req.flash("success", "Welcome to ChocoNest");
          res.redirect("/listings");
     })
 });
@@ -180,7 +180,7 @@ app.post("/login",passport.authenticate("local", {
     failureFlash: true,
 }), 
 async(req, res)=>{
-    req.flash("success","Welcome back to AirBnB");
+    req.flash("success","Welcome back to ChocoNest");
     res.redirect("/listings");
 })
 
